@@ -6,7 +6,6 @@ import { Footer } from "@/components/Footer";
 import { HappeningNow } from "@/components/HappeningNow";
 import { Discover } from "@/components/Discover";
 import { FAQ } from "@/components/FAQ";
-
 export default function Page() {
   return (
     <main className="min-h-screen bg-white">

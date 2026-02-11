@@ -139,8 +139,8 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
         });
     };
 
-    const handleCardClick = (url?: string) => {
-        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    const handleCardClick = (_url?: string) => {
+        // Cards are not clickable
     };
 
     const handleCardMove: React.MouseEventHandler<HTMLElement> = e => {
@@ -168,8 +168,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
                 <article
                     key={i}
                     onMouseMove={handleCardMove}
-                    onClick={() => handleCardClick(c.url)}
-                    className="group relative flex flex-col w-[300px] h-[400px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300 cursor-pointer"
+                    className="group relative flex flex-col w-[300px] h-[400px] rounded-[20px] overflow-hidden border-2 border-transparent transition-colors duration-300"
                     style={
                         {
                             '--card-border': c.borderColor || 'transparent',

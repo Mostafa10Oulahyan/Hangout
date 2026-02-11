@@ -1,9 +1,12 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Lock, Map, MessageSquare, User, Eye, Server, Shield, Bell } from "lucide-react";
+import { Lock, Map, MessageSquare, User, Eye, Server, Shield, Bell, X, Mail } from "lucide-react";
 
 export default function PrivacyPage() {
+    const [showPopup, setShowPopup] = useState(false);
     return (
         <main className="min-h-screen bg-gray-50 font-sans selection:bg-green-100 selection:text-green-900">
             {/* Navbar with dark background for visibility - Removed sticky/fixed behavior */}
@@ -151,15 +154,37 @@ export default function PrivacyPage() {
                         You manage your digital footprint. At any time, you can request a copy of your data or complete deletion of your account and all associated logs.
                     </p>
                     <div className="flex justify-center gap-4">
-                        <button className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors">
+                        <button onClick={() => setShowPopup(true)} className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors">
                             Manage Preferences
                         </button>
-                        <button className="bg-gray-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+                        <button onClick={() => setShowPopup(true)} className="bg-gray-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
                             Contact Data Officer
                         </button>
                     </div>
                 </div>
             </section>
+
+            {/* Support Popup */}
+            {showPopup && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowPopup(false)}>
+                    <div className="relative bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 animate-fade-in-up" onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => setShowPopup(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors">
+                            <X className="w-5 h-5" />
+                        </button>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                <Mail className="w-7 h-7 text-green-600" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Contact Support</h3>
+                            <p className="text-gray-500 mb-6">For any privacy-related inquiries, data requests, or preference changes, reach out to our Data Protection Officer.</p>
+                            <a href="mailto:support@hangout.com" className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+                                <Mail className="w-4 h-4" />
+                                support@hangout.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </main>
